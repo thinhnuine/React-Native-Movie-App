@@ -1,12 +1,14 @@
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Login from "./pages/Login.js";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Test</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <Login/>
+    </SafeAreaProvider>
   );
 }
 

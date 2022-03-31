@@ -22,6 +22,7 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-modalize": "^2.0.13",
+    "react-native-safe-area-context": "^4.2.4",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
