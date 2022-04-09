@@ -1,56 +1,25 @@
 import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/core";
-import { TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
+import { SafeAreaView, TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
 import { Link } from "@react-navigation/native";
-import { useState, useEffect } from "react";
-import { auth, signIn } from "../libs/configFirebase";
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigation = useNavigation();
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.navigate("Content");
-      }
-    });
-  }, []);
-
-  const handleSignIn = () => {
-    signIn(email, password);
-  };
-
+export default function ResetPassword() {
   return (
     <View style={styles.viewContainer}>
       <View style={styles.content}>
         <Image style={styles.brandApp} source={require("../assets/auth/login.png")} />
       </View>
       <View style={styles.formContainer}>
-        <Text style={styles.textGreet}>Welcome</Text>
-        <Text style={styles.textDirect}>
-          Don't have account?{" "}
-          <Link style={styles.textRegister} to={{ screen: "SignUp" }}>
-            Register now
-          </Link>
-        </Text>
+        <Text style={styles.textGreet}>Reset Password</Text>
+        <TextInput style={styles.formInput} placeholder="Enter username" />
         <TextInput
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.formInput}
-          placeholder="Enter username"
-        />
-        <TextInput
-          value={password}
-          onChangeText={(text) => setPassword(text)}
           style={styles.formInput}
           secureTextEntry={true}
           textContentType="password"
           placeholder="Enter password"
         />
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={handleSignIn}>
-            <Text style={styles.textButton}>Login</Text>
+          <Pressable style={styles.button}>
+            <Text style={styles.textButton}>Reset</Text>
           </Pressable>
         </View>
       </View>

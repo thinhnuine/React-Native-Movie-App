@@ -1,56 +1,28 @@
 import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/core";
-import { TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
+import { SafeAreaView, TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
 import { Link } from "@react-navigation/native";
-import { useState, useEffect } from "react";
-import { auth, signIn } from "../libs/configFirebase";
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigation = useNavigation();
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.navigate("Content");
-      }
-    });
-  }, []);
-
-  const handleSignIn = () => {
-    signIn(email, password);
-  };
-
+export default function SignUp() {
   return (
     <View style={styles.viewContainer}>
       <View style={styles.content}>
-        <Image style={styles.brandApp} source={require("../assets/auth/login.png")} />
+        <Image style={styles.brandApp} source={require("../assets/auth/signup.png")} />
       </View>
       <View style={styles.formContainer}>
-        <Text style={styles.textGreet}>Welcome</Text>
-        <Text style={styles.textDirect}>
-          Don't have account?{" "}
-          <Link style={styles.textRegister} to={{ screen: "SignUp" }}>
-            Register now
-          </Link>
-        </Text>
+        <Text style={styles.textGreet}>Join to relax</Text>
+        <Link to={{screen: "Login"}} style={styles.textDirect}>
+          Have an account? <Text style={styles.textRegister}>Login now</Text>
+        </Link>
+        <TextInput style={styles.formInput} placeholder="Enter username" />
         <TextInput
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.formInput}
-          placeholder="Enter username"
-        />
-        <TextInput
-          value={password}
-          onChangeText={(text) => setPassword(text)}
           style={styles.formInput}
           secureTextEntry={true}
           textContentType="password"
           placeholder="Enter password"
         />
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={handleSignIn}>
-            <Text style={styles.textButton}>Login</Text>
+          <Pressable style={styles.button}>
+            <Text style={styles.textButton}>Sign up</Text>
           </Pressable>
         </View>
       </View>
@@ -61,10 +33,9 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    backgroundColor: "#ffd43b",
+    backgroundColor: "#F2D1DC",
     flex: 1,
     alignItems: "center",
-    marginBottom: 0,
   },
   content: {
     flex: 1,
@@ -78,7 +49,8 @@ const styles = StyleSheet.create({
   textGreet: {
     fontSize: 40,
     fontWeight: "500",
-    color: "#ffd43b",
+    color: "#F2D1DC",
+    marginBottom: 20,
   },
   textRegister: {
     fontStyle: "italic",
@@ -94,6 +66,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 60,
     width: "100%",
     paddingTop: 40,
+    paddingBottom: 40,
     paddingLeft: 30,
     paddingRight: 30,
   },
@@ -107,7 +80,7 @@ const styles = StyleSheet.create({
     color: "#ccc",
     textAlign: "right",
     marginTop: 5,
-    marginBottom: 20,
+    marginBottom:20
   },
   buttonContainer: {
     alignItems: "center",
@@ -119,7 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 5,
     elevation: 3,
-    backgroundColor: "#ffd43b",
+    backgroundColor: "#F2D1DC",
     width: "60%",
   },
   textButton: {
