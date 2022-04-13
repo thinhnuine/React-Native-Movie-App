@@ -1,25 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/core";
 import { TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
 import { Link } from "@react-navigation/native";
-import { useState, useEffect } from "react";
-import { auth, signIn } from "../libs/configFirebase";
-export default function Login() {
+import { useState } from "react";
+import { auth } from "../libs/configFirebase";
+
+export default function Login({onLogin}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.navigate("Content");
-      }
-    });
-  }, []);
-
-  const handleSignIn = () => {
-    signIn(email, password);
-  };
 
   return (
     <View style={styles.viewContainer}>
@@ -49,7 +36,7 @@ export default function Login() {
           placeholder="Enter password"
         />
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={handleSignIn}>
+          <Pressable style={styles.button} onPress={onLogin}>
             <Text style={styles.textButton}>Login</Text>
           </Pressable>
         </View>
