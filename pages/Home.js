@@ -1,18 +1,33 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
-
+import { useEffect, useState } from "react";
+import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { useService } from "../libs/service/service";
 export default function Home() {
+
+  const {getTrendingDayTV} = useService()
+  const [popularFilm, setPopularFilm] = useState([])
+
+  useEffect(()=> {
+    getTrendingDayTV().then(result =>{
+      console.log('🚀 ~ getTrendingDayTV ~ result', result)
+      setPopularFilm(result)
+    })
+  },[])
   return (
-    <View style={styles.viewContainer}>
-    <Text>Home</Text>
+    <SafeAreaView style={styles.viewContainer}>
+      <Text>Hello James,</Text>
+      <Text>Watching film</Text>
+      {/* <FlatList>
+        <Image src></Image>
+      </FlatList> */}
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   viewContainer: {
-    backgroundColor: "#F2D1DC",
+    backgroundColor: "white",
     flex: 1,
     alignItems: "center",
   },
