@@ -4,11 +4,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import "react-native-gesture-handler";
 import { auth } from "./libs/configFirebase";
+import "react-native-gesture-handler";
 import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
 import Home from "./pages/Home.js";
+
 function Content() {
   const { Navigator, Screen } = createBottomTabNavigator();
   return (
