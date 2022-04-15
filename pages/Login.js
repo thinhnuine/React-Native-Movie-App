@@ -34,6 +34,7 @@ export default function Login(props) {
           textContentType="password"
           placeholder="Enter password"
         />
+        <Text style={styles.errorMessage}>{props.authError}</Text>
         <View style={styles.buttonContainer}>
           <Pressable style={styles.button} onPress={() => props.onLogin(email, password)}>
             <Text style={styles.textButton}>Login</Text>
@@ -72,6 +73,10 @@ const styles = StyleSheet.create({
   },
   textDirect: {
     marginBottom: 30,
+  },
+  errorMessage: {
+    color: "red",
+    textAlign: "center"
   },
   formContainer: {
     flex: 1.5,

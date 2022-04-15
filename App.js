@@ -22,6 +22,7 @@ function Content() {
 export default function App() {
   const { Navigator, Screen } = createNativeStackNavigator();
   const [isAuth, setIsAuth] = useState(false);
+  const [authError, setAuthError] = useState("");
 
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -29,7 +30,24 @@ export default function App() {
         const user = userCredential.user;
         setIsAuth(true);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        const code = error.code;
+        switch (code) {
+          case "auth/invalid-email":
+            setAuthError("Email invalid");
+            break;
+          case "auth/user-disabled":
+            setAuthError("User information has been disabled.");
+            break;
+          case "auth/user-not-found":
+          case "auth/wrong-password":
+            setAuthError("The email address or password is incorrect.");
+            break;
+          case "auth/too-many-requests":
+            setAuthError("The number of login failures has exceeded the specified number.");
+            break;
+        }
+      });
   };
 
   return (
@@ -42,7 +60,7 @@ export default function App() {
         ) : (
           <Navigator initialRouteName="Login">
             <Screen name="Login" options={{ headerShown: false }}>
-              {({ navigation }) => <Login navigation={navigation} onLogin={handleLogin} />}
+              {({ navigation }) => <Login navigation={navigation} onLogin={handleLogin} authError={authError} />}
             </Screen>
             <Screen name="SignUp" component={SignUp} />
           </Navigator>
