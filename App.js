@@ -9,13 +9,15 @@ import "react-native-gesture-handler";
 import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
 import Home from "./pages/Home.js";
+import Profile from "./pages/Profile";
 
 function Content() {
   const { Navigator, Screen } = createBottomTabNavigator();
   return (
-    <Navigator>
-      <Screen options={{ headerShown: false }} name="Home" component={Home} />
-    </Navigator>
+      <Navigator>
+        <Screen options={{ headerShown: false }} name="Home" component={Home} />
+        <Screen options={{ headerShown: false }} name="Profile" component={Profile} />
+      </Navigator>
   );
 }
 

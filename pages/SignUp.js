@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
+import { TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
 import { Link } from "@react-navigation/native";
 
 export default function SignUp() {
@@ -10,7 +10,7 @@ export default function SignUp() {
       </View>
       <View style={styles.formContainer}>
         <Text style={styles.textGreet}>Join to relax</Text>
-        <Link to={{screen: "Login"}} style={styles.textDirect}>
+        <Link to={{ screen: "Login" }} style={styles.textDirect}>
           Have an account? <Text style={styles.textRegister}>Login now</Text>
         </Link>
         <TextInput style={styles.formInput} placeholder="Enter username" />
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     color: "#ccc",
     textAlign: "right",
     marginTop: 5,
-    marginBottom:20
+    marginBottom: 20,
   },
   buttonContainer: {
     alignItems: "center",
