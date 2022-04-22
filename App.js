@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useState } from "react";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -62,7 +62,13 @@ export default function App() {
             <Screen name="Login" options={{ headerShown: false }}>
               {({ navigation }) => <Login navigation={navigation} onLogin={handleLogin} authError={authError} />}
             </Screen>
-            <Screen name="SignUp" component={SignUp} />
+            <Screen
+              name="SignUp"
+              options={{
+                title: "Sign up",
+              }}
+              component={SignUp}
+            />
           </Navigator>
         )}
       </NavigationContainer>

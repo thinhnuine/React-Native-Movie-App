@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions, Button } from "react-native";
+import { TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
 
@@ -9,22 +9,13 @@ export default function Login(props) {
 
   return (
     <View style={styles.viewContainer}>
-      <View style={styles.content}>
-        <Image style={styles.brandApp} source={require("../assets/auth/login.png")} />
-      </View>
       <View style={styles.formContainer}>
-        <Text style={styles.textGreet}>Welcome</Text>
-        <Text style={styles.textDirect}>
-          Don't have account?{" "}
-          <Link style={styles.textRegister} to={{ screen: "SignUp" }}>
-            Register now
-          </Link>
-        </Text>
         <TextInput
           value={email}
           onChangeText={(text) => setEmail(text)}
           style={styles.formInput}
-          placeholder="Enter username"
+          placeholder="Username"
+          placeholderTextColor={'#f1f3f5'}
         />
         <TextInput
           value={password}
@@ -32,13 +23,25 @@ export default function Login(props) {
           style={styles.formInput}
           secureTextEntry={true}
           textContentType="password"
-          placeholder="Enter password"
+          placeholder="Password"
+          placeholderTextColor={'#f1f3f5'}
         />
         <Text style={styles.errorMessage}>{props.authError}</Text>
         <View style={styles.buttonContainer}>
           <Pressable style={styles.button} onPress={() => props.onLogin(email, password)}>
             <Text style={styles.textButton}>Login</Text>
           </Pressable>
+        </View>
+        <View>
+          <Link style={styles.forgotLink} to={{ screen: "ResetPassword" }}>
+            Reset Password
+          </Link>
+          <Text style={styles.textDirect}>
+          Don't have account?{" "}
+          <Link style={styles.textRegister} to={{ screen: "SignUp" }}>
+            Register now
+          </Link>
+        </Text>
         </View>
       </View>
       <StatusBar style="auto" />
@@ -48,7 +51,7 @@ export default function Login(props) {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    backgroundColor: "#ffd43b",
+    backgroundColor: "black",
     flex: 1,
     alignItems: "center",
     marginBottom: 0,
@@ -56,11 +59,6 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingTop: "5%",
-  },
-  brandApp: {
-    height: "100%",
-    width: Dimensions.get("screen").width / 1.7,
-    resizeMode: "cover",
   },
   textGreet: {
     fontSize: 40,
@@ -72,6 +70,8 @@ const styles = StyleSheet.create({
     color: "#fa5252",
   },
   textDirect: {
+    textAlign:"center",
+    color: "#fff",
     marginBottom: 30,
   },
   errorMessage: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1.5,
-    backgroundColor: "#fff",
+    marginTop: Dimensions.get("screen").height/3,
     borderTopStartRadius: 60,
     borderTopEndRadius: 60,
     width: "100%",
@@ -89,15 +89,18 @@ const styles = StyleSheet.create({
     paddingRight: 30,
   },
   formInput: {
-    borderBottomWidth: 1,
-    padding: 10,
+    borderWidth: 1,
+    padding: 15,
     marginBottom: 20,
+    backgroundColor: "#444",
+    borderRadius: 5,
+    color: "#fff"
   },
   forgotLink: {
-    fontSize: 16,
-    color: "#ccc",
-    textAlign: "right",
-    marginTop: 5,
+    fontSize: 13,
+    color: "#fff",
+    textAlign: "center",
+    marginTop: 30,
     marginBottom: 20,
   },
   buttonContainer: {
@@ -110,10 +113,15 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 5,
     elevation: 3,
-    backgroundColor: "#ffd43b",
+    backgroundColor: "black",
+    borderColor: "#444",
+    borderWidth: 2,
     width: "60%",
+    color: "#fff"
   },
   textButton: {
-    color: "black",
+    color: "#fff",
+    fontWeight:"500",
+    fontSize: 15
   },
 });
