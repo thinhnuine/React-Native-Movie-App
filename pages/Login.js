@@ -1,51 +1,54 @@
 import { StatusBar } from "expo-status-bar";
-import { TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
+import { TextInput, StyleSheet, Text, View, Pressable, Dimensions, KeyboardAvoidingView } from "react-native";
 import { Link } from "@react-navigation/native";
 import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <View style={styles.viewContainer}>
-      <View style={styles.formContainer}>
-        <TextInput
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.formInput}
-          placeholder="Username"
-          placeholderTextColor={'#f1f3f5'}
-        />
-        <TextInput
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={styles.formInput}
-          secureTextEntry={true}
-          textContentType="password"
-          placeholder="Password"
-          placeholderTextColor={'#f1f3f5'}
-        />
-        <Text style={styles.errorMessage}>{props.authError}</Text>
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={() => props.onLogin(email, password)}>
-            <Text style={styles.textButton}>Login</Text>
-          </Pressable>
+    <SafeAreaView style={styles.viewContainer}>
+      {/* <KeyboardAvoidingView behavior="position"  style={styles.container}> */}
+        <View style={styles.formContainer}>
+          <TextInput
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={styles.formInput}
+            placeholder="Email"
+            placeholderTextColor={"#f1f3f5"}
+          />
+          <TextInput
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={styles.formInput}
+            secureTextEntry={true}
+            textContentType="password"
+            placeholder="Password"
+            placeholderTextColor={"#f1f3f5"}
+          />
+          <Text style={styles.errorMessage}>{props.authError}</Text>
+          <View style={styles.buttonContainer}>
+            <Pressable style={styles.button} onPress={() => props.onLogin(email, password)}>
+              <Text style={styles.textButton}>Login</Text>
+            </Pressable>
+          </View>
+          <View>
+            <Link style={styles.forgotLink} to={{ screen: "ResetPassword" }}>
+              Reset Password
+            </Link>
+            <Text style={styles.textDirect}>
+              Don't have account?{" "}
+              <Link style={styles.textRegister} to={{ screen: "SignUp" }}>
+                Register now
+              </Link>
+            </Text>
+          </View>
         </View>
-        <View>
-          <Link style={styles.forgotLink} to={{ screen: "ResetPassword" }}>
-            Reset Password
-          </Link>
-          <Text style={styles.textDirect}>
-          Don't have account?{" "}
-          <Link style={styles.textRegister} to={{ screen: "SignUp" }}>
-            Register now
-          </Link>
-        </Text>
-        </View>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+      {/* </KeyboardAvoidingView> */}
+      <StatusBar style={{color:"white"}} />
+    </SafeAreaView>
   );
 }
 
@@ -54,39 +57,27 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     flex: 1,
     alignItems: "center",
-    marginBottom: 0,
   },
-  content: {
+  container: {
     flex: 1,
-    paddingTop: "5%",
-  },
-  textGreet: {
-    fontSize: 40,
-    fontWeight: "500",
-    color: "#ffd43b",
   },
   textRegister: {
     fontStyle: "italic",
     color: "#fa5252",
   },
   textDirect: {
-    textAlign:"center",
+    textAlign: "center",
     color: "#fff",
     marginBottom: 30,
   },
   errorMessage: {
     color: "red",
-    textAlign: "center"
+    textAlign: "center",
   },
   formContainer: {
-    flex: 1.5,
-    marginTop: Dimensions.get("screen").height/3,
-    borderTopStartRadius: 60,
-    borderTopEndRadius: 60,
-    width: "100%",
-    paddingTop: 40,
-    paddingLeft: 30,
-    paddingRight: 30,
+    flex: 1,
+    marginTop: Dimensions.get("screen").height / 3,
+    width:"70%",
   },
   formInput: {
     borderWidth: 1,
@@ -94,7 +85,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "#444",
     borderRadius: 5,
-    color: "#fff"
+    color: "#fff",
   },
   forgotLink: {
     fontSize: 13,
@@ -117,11 +108,11 @@ const styles = StyleSheet.create({
     borderColor: "#444",
     borderWidth: 2,
     width: "60%",
-    color: "#fff"
+    color: "#fff",
   },
   textButton: {
     color: "#fff",
-    fontWeight:"500",
-    fontSize: 15
+    fontWeight: "500",
+    fontSize: 15,
   },
 });

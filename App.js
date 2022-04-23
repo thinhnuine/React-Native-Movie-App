@@ -9,13 +9,15 @@ import "react-native-gesture-handler";
 import Login from "./pages/Login.js";
 import SignUp from "./pages/SignUp.js";
 import Home from "./pages/Home.js";
+import Profile from "./pages/Profile";
 
 function Content() {
   const { Navigator, Screen } = createBottomTabNavigator();
   return (
-    <Navigator>
-      <Screen options={{ headerShown: false }} name="Home" component={Home} />
-    </Navigator>
+      <Navigator>
+        <Screen options={{ headerShown: false }} name="Home" component={Home} />
+        <Screen options={{ headerShown: false }} name="Profile" component={Profile} />
+      </Navigator>
   );
 }
 
@@ -34,17 +36,17 @@ export default function App() {
         const code = error.code;
         switch (code) {
           case "auth/invalid-email":
-            setAuthError("Email invalid");
+            setAuthError("Email invalid!");
             break;
           case "auth/user-disabled":
-            setAuthError("User information has been disabled.");
+            setAuthError("User information has been disabled!");
             break;
           case "auth/user-not-found":
           case "auth/wrong-password":
-            setAuthError("The email address or password is incorrect.");
+            setAuthError("The email address or password is incorrect!");
             break;
           case "auth/too-many-requests":
-            setAuthError("The number of login failures has exceeded the specified number.");
+            setAuthError("The number of login failures has exceeded the specified number!");
             break;
         }
       });
