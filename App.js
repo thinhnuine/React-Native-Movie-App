@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useState } from "react";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -36,17 +36,17 @@ export default function App() {
         const code = error.code;
         switch (code) {
           case "auth/invalid-email":
-            setAuthError("Email invalid");
+            setAuthError("Email invalid!");
             break;
           case "auth/user-disabled":
-            setAuthError("User information has been disabled.");
+            setAuthError("User information has been disabled!");
             break;
           case "auth/user-not-found":
           case "auth/wrong-password":
-            setAuthError("The email address or password is incorrect.");
+            setAuthError("The email address or password is incorrect!");
             break;
           case "auth/too-many-requests":
-            setAuthError("The number of login failures has exceeded the specified number.");
+            setAuthError("The number of login failures has exceeded the specified number!");
             break;
         }
       });
@@ -64,7 +64,13 @@ export default function App() {
             <Screen name="Login" options={{ headerShown: false }}>
               {({ navigation }) => <Login navigation={navigation} onLogin={handleLogin} authError={authError} />}
             </Screen>
-            <Screen name="SignUp" component={SignUp} />
+            <Screen
+              name="SignUp"
+              options={{
+                title: "Sign up",
+              }}
+              component={SignUp}
+            />
           </Navigator>
         )}
       </NavigationContainer>

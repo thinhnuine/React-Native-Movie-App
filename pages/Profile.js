@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
 
 export default function Profile() {
   return (
