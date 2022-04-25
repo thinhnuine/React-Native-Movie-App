@@ -1,31 +1,71 @@
 import { useState } from "react";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./libs/configFirebase";
 import "react-native-gesture-handler";
-import Login from "./pages/Login.js";
-import SignUp from "./pages/SignUp.js";
-import Home from "./pages/Home.js";
-import Profile from "./pages/Profile";
+import Login from "./screens/Login.js";
+import SignUp from "./screens/SignUp.js";
+import Home from "./screens/Home.js";
+import Profile from "./screens/Profile";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Search from "./screens/Search";
+import MovieDetail from "./screens/MovieDetail";
+import ResetPassword from "./screens/ResetPassword";
 
 function Content() {
   const { Navigator, Screen } = createBottomTabNavigator();
   return (
-      <Navigator>
-        <Screen options={{ headerShown: false }} name="Home" component={Home} />
-        <Screen options={{ headerShown: false }} name="Profile" component={Profile} />
-      </Navigator>
+    <Navigator>
+      <Screen
+        options={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: "#000000",
+          },
+          tabBarInactiveTintColor: "#cccccc",
+          tabBarActiveTintColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color={color} size={size} />,
+        }}
+        name="Home"
+        component={Home}
+      />
+      <Screen
+        options={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: "#000000",
+          },
+          tabBarInactiveTintColor: "#cccccc",
+          tabBarActiveTintColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="magnify" color={color} size={size} />,
+        }}
+        name="Search"
+        component={Search}
+      />
+      <Screen
+        options={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: "#000000",
+          },
+          tabBarInactiveTintColor: "#cccccc",
+          tabBarActiveTintColor: "#ffffff",
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color={color} size={size} />,
+        }}
+        name="Profile"
+        component={Profile}
+      />
+    </Navigator>
   );
 }
 
 export default function App() {
   const { Navigator, Screen } = createNativeStackNavigator();
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   const [authError, setAuthError] = useState("");
-
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -58,6 +98,7 @@ export default function App() {
         {isAuth ? (
           <Navigator initialRouteName="Content">
             <Screen name="Content" component={Content} options={{ headerShown: false }} />
+            <Screen name="MovieDetail" component={MovieDetail} options={{ headerShown: false }} />
           </Navigator>
         ) : (
           <Navigator initialRouteName="Login">
@@ -70,6 +111,13 @@ export default function App() {
                 title: "Sign up",
               }}
               component={SignUp}
+            />
+            <Screen
+              name="SignUp"
+              options={{
+                title: "Reset password",
+              }}
+              component={ResetPassword}
             />
           </Navigator>
         )}
