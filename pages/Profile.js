@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
+import { StatusBar } from 'expo-status-bar'
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions } from 'react-native'
 
 export default function Profile() {
   return (
@@ -7,13 +7,13 @@ export default function Profile() {
       <Text>Profile</Text>
       <StatusBar style="auto" />
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   viewContainer: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     flex: 1,
-    alignItems: "center",
-  },
-});
+    alignItems: 'center'
+  }
+})
