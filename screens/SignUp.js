@@ -66,7 +66,7 @@ export default function SignUp({navigation}) {
           </Pressable>
         </View>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </View>
   );
 }
