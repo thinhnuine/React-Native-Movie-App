@@ -112,13 +112,6 @@ export default function App() {
               }}
               component={SignUp}
             />
-            <Screen
-              name="SignUp"
-              options={{
-                title: "Reset password",
-              }}
-              component={ResetPassword}
-            />
           </Navigator>
         )}
       </NavigationContainer>

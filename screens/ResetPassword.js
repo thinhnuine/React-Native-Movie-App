@@ -6,7 +6,6 @@ export default function ResetPassword() {
   return (
     <View style={styles.viewContainer}>
       <View style={styles.content}>
-        <Image style={styles.brandApp} source={require("../assets/auth/login.png")} />
       </View>
       <View style={styles.formContainer}>
         <Text style={styles.textGreet}>Reset Password</Text>
