@@ -1,7 +1,7 @@
-import { FlatList, Text, StyleSheet, View } from "react-native";
-import MovieItem from "./MovieItem";
+import { FlatList, Text, StyleSheet, View } from 'react-native'
+import MovieItem from './MovieItem'
 
-const MoviesList = (props) => {
+const MoviesList = props => {
   return (
     <View style={styles.viewMovieItem}>
       <Text style={styles.viewMovieItem__title}>{props.title}</Text>
@@ -9,22 +9,22 @@ const MoviesList = (props) => {
         data={props.data}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         renderItem={MovieItem}
       />
     </View>
-  );
-};
+  )
+}
 const styles = StyleSheet.create({
   viewMovieItem: {
-    marginBottom: 15,
+    marginBottom: 15
   },
   viewMovieItem__title: {
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 5,
-    color: "white",
-  },
-});
+    color: 'white'
+  }
+})
 
-export default MoviesList;
+export default MoviesList

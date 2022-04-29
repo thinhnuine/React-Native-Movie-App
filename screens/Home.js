@@ -1,8 +1,8 @@
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { SafeAreaView, View, StyleSheet, ScrollView } from "react-native";
-import MoviesList from "../components/MoviesList";
-import { useService } from "../libs/service/service";
+import { StatusBar } from 'expo-status-bar'
+import { useEffect, useState } from 'react'
+import { SafeAreaView, View, StyleSheet, ScrollView } from 'react-native'
+import MoviesList from '../components/MoviesList'
+import { useService } from '../libs/service/service'
 
 export default function Home() {
   const {
@@ -14,49 +14,49 @@ export default function Home() {
     getHighRateMovies,
     getComedyMovies,
     getFamilyMovies,
-    getScienceFictionMovies,
-  } = useService();
+    getScienceFictionMovies
+  } = useService()
 
   // Fetch API
-  const [trendingMovie, setTrendingMovie] = useState([]);
-  const [trendingTV, setTrendingTV] = useState([]);
-  const [actionMovies, setActionMovies] = useState([]);
-  const [horrorMovies, setHorrorMovies] = useState([]);
-  const [moviesFrom2010, setMoviesFrom2010] = useState([]);
-  const [highRateMovies, setHighRateMovies] = useState([]);
-  const [familyMovies, setFamilyMovies] = useState([]);
-  const [comedyMovies, setComedyMovies] = useState([]);
-  const [scienceFictionMovies, setScienceFictionMovies] = useState([]);
+  const [trendingMovie, setTrendingMovie] = useState([])
+  const [trendingTV, setTrendingTV] = useState([])
+  const [actionMovies, setActionMovies] = useState([])
+  const [horrorMovies, setHorrorMovies] = useState([])
+  const [moviesFrom2010, setMoviesFrom2010] = useState([])
+  const [highRateMovies, setHighRateMovies] = useState([])
+  const [familyMovies, setFamilyMovies] = useState([])
+  const [comedyMovies, setComedyMovies] = useState([])
+  const [scienceFictionMovies, setScienceFictionMovies] = useState([])
 
   useEffect(() => {
-    getTrendingTV().then((result) => {
-      setTrendingTV(result);
-    });
-    getTrendingMovies().then((result) => {
-      setTrendingMovie(result);
-    });
-    getActionMovies().then((result) => {
-      setActionMovies(result);
-    });
-    getHorrorMovies().then((result) => {
-      setHorrorMovies(result);
-    });
-    getMoviesFrom2010().then((result) => {
-      setMoviesFrom2010(result);
-    });
-    getHighRateMovies().then((result) => {
-      setHighRateMovies(result);
-    });
-    getFamilyMovies().then((result) => {
-      setFamilyMovies(result);
-    });
-    getScienceFictionMovies().then((result) => {
-      setScienceFictionMovies(result);
-    });
-    getComedyMovies().then((result) => {
-      setComedyMovies(result);
-    });
-  }, []);
+    getTrendingTV().then(result => {
+      setTrendingTV(result)
+    })
+    getTrendingMovies().then(result => {
+      setTrendingMovie(result)
+    })
+    getActionMovies().then(result => {
+      setActionMovies(result)
+    })
+    getHorrorMovies().then(result => {
+      setHorrorMovies(result)
+    })
+    getMoviesFrom2010().then(result => {
+      setMoviesFrom2010(result)
+    })
+    getHighRateMovies().then(result => {
+      setHighRateMovies(result)
+    })
+    getFamilyMovies().then(result => {
+      setFamilyMovies(result)
+    })
+    getScienceFictionMovies().then(result => {
+      setScienceFictionMovies(result)
+    })
+    getComedyMovies().then(result => {
+      setComedyMovies(result)
+    })
+  }, [])
 
   return (
     <SafeAreaView style={styles.viewContainer}>
@@ -75,17 +75,17 @@ export default function Home() {
       </View>
       <StatusBar style="light" />
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   viewContainer: {
-    backgroundColor: "black",
-    flex: 1,
+    backgroundColor: 'black',
+    flex: 1
   },
   viewMoviesList: {
     paddingLeft: 20,
     paddingRight: 20,
-    flex: 1,
-  },
-});
+    flex: 1
+  }
+})
