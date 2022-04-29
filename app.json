@@ -4,11 +4,11 @@
     "slug": "movie_app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo_movie_app.png",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/logo_movie_app.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "black"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,8 +21,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo_movie_app.png",
-        "backgroundColor": "#000000"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
