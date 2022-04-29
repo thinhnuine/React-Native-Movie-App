@@ -2,9 +2,23 @@ import { StatusBar } from 'expo-status-bar'
 import { TextInput, StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
 import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { auth } from '../libs/configFirebase'
+import { sendPasswordResetEmail } from 'firebase/auth'
 
-export default function Login(props) {
+export default function ResetPassword() {
   const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+
+  const resetPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setMessage('Email has been sent to your mail')
+      })
+      .catch(error => {
+        const errorMessage = error.message
+        alert(errorMessage)
+      })
+  }
 
   return (
     <SafeAreaView style={styles.viewContainer}>
@@ -16,8 +30,9 @@ export default function Login(props) {
           placeholder="Email"
           placeholderTextColor={'#f1f3f5'}
         />
+        <Text style={styles.successMessage}>{message}</Text>
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.button}>
+          <Pressable style={styles.button} onPress={resetPassword}>
             <Text style={styles.textButton}>Reset Password</Text>
           </Pressable>
         </View>
@@ -36,17 +51,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  textRegister: {
-    fontStyle: 'italic',
-    color: '#fa5252'
-  },
-  textDirect: {
-    textAlign: 'center',
-    color: '#fff',
-    marginBottom: 30
-  },
-  errorMessage: {
-    color: 'red',
+  successMessage: {
+    color: '#51cf66',
     textAlign: 'center'
   },
   formContainer: {
@@ -62,13 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: '#fff'
   },
-  forgotLink: {
-    fontSize: 13,
-    color: '#fff',
-    textAlign: 'center',
-    marginTop: 30,
-    marginBottom: 20
-  },
+
   buttonContainer: {
     alignItems: 'center'
   },
