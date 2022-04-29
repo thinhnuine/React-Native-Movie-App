@@ -1,13 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, TextInput, StyleSheet, Text, View, Image, Pressable, Dimensions } from "react-native";
-import { Link } from "@react-navigation/native";
+import { TextInput, StyleSheet, Text, View, Pressable, Dimensions } from "react-native";
 
 export default function ResetPassword() {
   return (
     <View style={styles.viewContainer}>
-      <View style={styles.content}>
-        <Image style={styles.brandApp} source={require("../assets/auth/login.png")} />
-      </View>
       <View style={styles.formContainer}>
         <Text style={styles.textGreet}>Reset Password</Text>
         <TextInput style={styles.formInput} placeholder="Enter username" />

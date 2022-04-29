@@ -4,14 +4,7 @@ import { SafeAreaView, View, StyleSheet, ScrollView } from "react-native";
 import { useService } from "../libs/service/service";
 
 export default function MovieDetail() {
-  const {
-   
-  } = useService();
-
   
-  useEffect(() => {
-  }, []);
-
   return (
     <SafeAreaView style={styles.viewContainer}>
       <View style={styles.movieDetail}>
