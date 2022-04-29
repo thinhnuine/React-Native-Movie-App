@@ -36,7 +36,10 @@
     "react-navigation": "^4.4.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-prettier": "^0.0.0-empty",
+    "prettier": "^2.6.2"
   },
   "private": true
 }
