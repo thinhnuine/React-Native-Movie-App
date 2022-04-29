@@ -6,10 +6,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./libs/configFirebase";
 import "react-native-gesture-handler";
-import Login from "./pages/Login.js";
-import SignUp from "./pages/SignUp.js";
-import Home from "./pages/Home.js";
-import Profile from "./pages/Profile";
+import Login from "./screens/Login.js";
+import SignUp from "./screens/SignUp.js";
+import Home from "./screens/Home.js";
+import Profile from "./screens/Profile";
+import ResetPassword from "./screens/ResetPassword";
 
 function Content() {
   const { Navigator, Screen } = createBottomTabNavigator();
@@ -23,7 +24,7 @@ function Content() {
 
 export default function App() {
   const { Navigator, Screen } = createNativeStackNavigator();
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   const [authError, setAuthError] = useState("");
 
   const handleLogin = (email, password) => {
@@ -70,6 +71,13 @@ export default function App() {
                 title: "Sign up",
               }}
               component={SignUp}
+            />
+            <Screen
+              name="ResetPassword"
+              options={{
+                title: "Reset password",
+              }}
+              component={ResetPassword}
             />
           </Navigator>
         )}
