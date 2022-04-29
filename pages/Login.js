@@ -47,7 +47,7 @@ export default function Login(props) {
           </View>
         </View>
       {/* </KeyboardAvoidingView> */}
-      <StatusBar style="light" />
+      <StatusBar style={{color:"white"}} />
     </SafeAreaView>
   );
 }
