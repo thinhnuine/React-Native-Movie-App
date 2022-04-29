@@ -1,12 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { SafeAreaView, View, StyleSheet, ScrollView, Text } from "react-native";
-import MoviesList from "../components/MoviesList";
+import { StatusBar } from 'expo-status-bar'
+import { useEffect, useState } from 'react'
+import { SafeAreaView, View, StyleSheet, ScrollView, Text } from 'react-native'
+import MoviesList from '../components/MoviesList'
 
 export default function Search() {
-  
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, [])
 
   return (
     <SafeAreaView style={styles.viewContainer}>
@@ -15,17 +13,17 @@ export default function Search() {
       </View>
       <StatusBar style="light" />
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   viewContainer: {
-    backgroundColor: "black",
-    flex: 1,
+    backgroundColor: 'black',
+    flex: 1
   },
   viewMoviesList: {
     paddingLeft: 20,
     paddingRight: 20,
-    flex: 1,
-  },
-});
+    flex: 1
+  }
+})
