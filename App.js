@@ -64,7 +64,7 @@ function Content() {
 
 export default function App() {
   const { Navigator, Screen } = createNativeStackNavigator();
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const [authError, setAuthError] = useState("");
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -111,6 +111,13 @@ export default function App() {
                 title: "Sign up",
               }}
               component={SignUp}
+            />
+            <Screen
+              name="ResetPassword"
+              options={{
+                title: "Reset password",
+              }}
+              component={ResetPassword}
             />
           </Navigator>
         )}
