@@ -1,91 +1,94 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { SafeAreaView, View, StyleSheet, ScrollView } from "react-native";
-import MoviesList from "../components/MoviesList";
+import { SafeAreaView, View, StyleSheet, Text, Image } from "react-native";
 import { useService } from "../libs/service/service";
 
 export default function Home() {
-  const {
-    getTrendingTV,
-    getTrendingMovies,
-    getActionMovies,
-    getHorrorMovies,
-    getMoviesFrom2010,
-    getHighRateMovies,
-    getComedyMovies,
-    getFamilyMovies,
-    getScienceFictionMovies,
-  } = useService();
-
-  // Fetch API
-  const [trendingMovie, setTrendingMovie] = useState([]);
-  const [trendingTV, setTrendingTV] = useState([]);
-  const [actionMovies, setActionMovies] = useState([]);
-  const [horrorMovies, setHorrorMovies] = useState([]);
-  const [moviesFrom2010, setMoviesFrom2010] = useState([]);
-  const [highRateMovies, setHighRateMovies] = useState([]);
-  const [familyMovies, setFamilyMovies] = useState([]);
-  const [comedyMovies, setComedyMovies] = useState([]);
-  const [scienceFictionMovies, setScienceFictionMovies] = useState([]);
+  const { getTrendingDayTV } = useService();
+  const [popularFilms, setPopularFilms] = useState([]);
 
   useEffect(() => {
-    getTrendingTV().then((result) => {
-      setTrendingTV(result);
-    });
-    getTrendingMovies().then((result) => {
-      setTrendingMovie(result);
-    });
-    getActionMovies().then((result) => {
-      setActionMovies(result);
-    });
-    getHorrorMovies().then((result) => {
-      setHorrorMovies(result);
-    });
-    getMoviesFrom2010().then((result) => {
-      setMoviesFrom2010(result);
-    });
-    getHighRateMovies().then((result) => {
-      setHighRateMovies(result);
-    });
-    getFamilyMovies().then((result) => {
-      setFamilyMovies(result);
-    });
-    getScienceFictionMovies().then((result) => {
-      setScienceFictionMovies(result);
-    });
-    getComedyMovies().then((result) => {
-      setComedyMovies(result);
+    getTrendingDayTV().then((result) => {
+      setPopularFilms(result);
     });
   }, []);
-
   return (
     <SafeAreaView style={styles.viewContainer}>
-      <View style={styles.viewMoviesList}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <MoviesList title="TV shows trending" data={trendingTV} />
-          <MoviesList title="Top hot movies" data={trendingMovie} />
-          <MoviesList title="Action movies" data={actionMovies} />
-          <MoviesList title="Horror movies" data={horrorMovies} />
-          <MoviesList title="Back to 2010" data={moviesFrom2010} />
-          <MoviesList title="Family movies" data={familyMovies} />
-          <MoviesList title="Science movies" data={scienceFictionMovies} />
-          <MoviesList title="Comedy movies" data={comedyMovies} />
-          <MoviesList title="High rate movies" data={highRateMovies} />
-        </ScrollView>
+      <View style={styles.textGreeting}>
+        <Text style={styles.textGreeting__hello}>Hello James,</Text>
+        <Text style={styles.textGreeting__suggest}>Choose your favourite movie</Text>
       </View>
-      <StatusBar style="light" />
+      <View style={styles.popular}>
+        <Text style={styles.popular__heading}>Popular</Text>
+        {popularFilms
+          ? popularFilms.map((popularFilm) => {
+              return (
+                <View key={popularFilm.id} style={styles.popularItem}>
+                  <Image
+                    style={styles.popularItem__image}
+                    source={{ uri: `https://image.tmdb.org/t/p/w500${popularFilm.poster_path}` }}
+                  />
+                  <View style={styles.popularItem__left}>
+                    <Text style={styles.popularItem__name}>{popularFilm.name}</Text>
+                    <Text style={styles.popularItem__date}>{popularFilm.first_air_date.slice(0,4)} | {popularFilm.origin_country}</Text>
+                    <Text style={styles.popularItem__genres}>Action & Adventure</Text>
+                  </View>
+                </View>
+              );
+            })
+          : <Text></Text>}
+      </View>
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   viewContainer: {
-    backgroundColor: "black",
+    backgroundColor: "white",
     flex: 1,
   },
-  viewMoviesList: {
+  textGreeting: {
+    paddingTop: 20,
+    paddingLeft: 20,
+  },
+  textGreeting__hello: {
+    fontSize: 30,
+    marginBottom: 10,
+    fontWeight: "500",
+  },
+  textGreeting__suggest: {
+    fontSize: 18,
+    color: "#999",
+  },
+  popular: {
+    paddingTop: 20,
     paddingLeft: 20,
     paddingRight: 20,
     flex: 1,
   },
+  popular__heading: {
+    fontSize: 25,
+    fontWeight: "500",
+    marginBottom: 20,
+  },
+  popularItem: {
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: 30,
+    alignItems: "flex-start",
+  },
+  popularItem__left:{
+    marginLeft: 15
+   },
+  popularItem__image: {
+    width: 120,
+    height: 140,
+    resizeMode: "cover",
+    borderRadius: 15,
+  },
+  popularItem__name: {
+    fontSize: 22,
+    fontWeight: "500"
+  }
 });
