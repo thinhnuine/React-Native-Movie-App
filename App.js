@@ -14,7 +14,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Search from './screens/Search'
 import MovieDetail from './screens/MovieDetail'
 import ResetPassword from './screens/ResetPassword'
-
 function Content() {
   const { Navigator, Screen } = createBottomTabNavigator()
   return (
@@ -98,7 +97,7 @@ export default function App() {
         {isAuth ? (
           <Navigator initialRouteName="Content">
             <Screen name="Content" component={Content} options={{ headerShown: false }} />
-            <Screen name="MovieDetail" component={MovieDetail} options={{ headerShown: false }} />
+            <Screen name="MovieDetail" component={MovieDetail} options={{ headerShown: true }} />
           </Navigator>
         ) : (
           <Navigator initialRouteName="Login">
@@ -113,7 +112,7 @@ export default function App() {
               component={SignUp}
             />
             <Screen
-              name="SignUp"
+              name="ResetPassword"
               options={{
                 title: 'Reset password'
               }}

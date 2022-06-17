@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import { useEffect, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, ScrollView } from 'react-native'
 import MoviesList from '../components/MoviesList'
-import { useService } from '../libs/service/service'
+import { useMovieService } from '../libs/service/MovieService'
 
 export default function Home() {
   const {
@@ -15,7 +15,7 @@ export default function Home() {
     getComedyMovies,
     getFamilyMovies,
     getScienceFictionMovies
-  } = useService()
+  } = useMovieService()
 
   // Fetch API
   const [trendingMovie, setTrendingMovie] = useState([])

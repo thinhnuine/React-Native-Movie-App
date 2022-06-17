@@ -1,7 +1,7 @@
 const axios = require('axios')
 const api_key = 'd77bf22fa27ded25c3e6469ec6a3797c'
 
-export function useService() {
+export function useMovieService() {
   const getTrendingMovies = async () => {
     try {
       const response = await axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${api_key}`)
@@ -105,5 +105,34 @@ export function useService() {
     getScienceFictionMovies,
     getFamilyMovies,
     getComedyMovies
+  }
+}
+
+export function useMovieDetailService() {
+  const getMovieDetail = async movieId => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&language=en-US`
+      )
+      return response.data
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  const getVideoMovieDetail = async movieId => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}&language=en-US`
+      )
+      return response.data.results
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  return {
+    getMovieDetail,
+    getVideoMovieDetail
   }
 }
