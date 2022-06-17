@@ -4,9 +4,9 @@
     "slug": "movie_app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo_movie_app.png",
+    "icon": "./assets/icon.jpeg",
     "splash": {
-      "image": "./assets/logo_movie_app.png",
+      "image": "./assets/icon.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo_movie_app.png",
+        "foregroundImage": "./assets/icon.jpeg",
         "backgroundColor": "#000000"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.jpeg"
     }
   }
 }

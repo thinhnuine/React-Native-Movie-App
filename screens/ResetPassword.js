@@ -2,10 +2,38 @@ import { StatusBar } from 'expo-status-bar'
 import { TextInput, StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
 import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { auth } from '../libs/configFirebase'
 
-export default function Login(props) {
+export default function ResetPassword({ navigation }) {
   const [email, setEmail] = useState('')
+  const [resetError, setResetError] = useState('')
 
+  const handleResetPassword = email => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert('Reset password successfully!')
+        navigation.push('Login')
+      })
+      .catch(error => {
+        const code = error.code
+        switch (code) {
+          case 'auth/invalid-email':
+            setResetError('Email invalid!')
+            break
+          case 'auth/user-disabled':
+            setResetError('User information has been disabled!')
+            break
+          case 'auth/user-not-found':
+          case 'auth/wrong-password':
+            setResetError('The email address or password is incorrect!')
+            break
+          case 'auth/too-many-requests':
+            setResetError('The number of login failures has exceeded the specified number!')
+            break
+        }
+      })
+  }
   return (
     <SafeAreaView style={styles.viewContainer}>
       <View style={styles.formContainer}>
@@ -16,8 +44,9 @@ export default function Login(props) {
           placeholder="Email"
           placeholderTextColor={'#f1f3f5'}
         />
+        <Text style={styles.errorMessage}>{resetError}</Text>
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.button}>
+          <Pressable style={styles.button} onPress={() => handleResetPassword(email)}>
             <Text style={styles.textButton}>Reset Password</Text>
           </Pressable>
         </View>

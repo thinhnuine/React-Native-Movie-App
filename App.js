@@ -63,7 +63,7 @@ function Content() {
 
 export default function App() {
   const { Navigator, Screen } = createNativeStackNavigator()
-  const [isAuth, setIsAuth] = useState(true)
+  const [isAuth, setIsAuth] = useState(false)
   const [authError, setAuthError] = useState('')
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
