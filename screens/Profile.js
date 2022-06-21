@@ -1,11 +1,20 @@
 // import { StatusBar } from 'expo-status-bar'
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, Dimensions } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image,  Platform, StatusBar, TouchableNativeFeedback, TouchableOpacity } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import Entypo from 'react-native-vector-icons/Entypo'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useContext } from "react"
+import { AppContext } from "../Context"
+import { getAuth, signOut } from "firebase/auth"
 export default function Profile() {
+  const { setIsAuth} = useContext(AppContext);
+  const auth = getAuth();
+  console.log('auth :', auth.currentUser.email);
+  const  handleLogOut = ()=>{
+    signOut(auth).then().catch()
+    setIsAuth(false)
+  }
   const mockData = [
     {
       tilte:'address',
@@ -52,7 +61,8 @@ export default function Profile() {
     {
       tilte:'logout',
       icon: () => <AntDesign style={styles.iconHeader} name="logout" color={'#FF6347'} size={25}/>,
-      value: 'Logout'
+      value: 'Logout',
+      onPress: () => handleLogOut()
     },
   ]
   return (
@@ -70,7 +80,7 @@ export default function Profile() {
             Name user
           </Text>
           <Text style={{color:'#808080', fontSize:14}}>
-            Email
+            {auth.currentUser.email}
           </Text>
         </View>
         </View>
@@ -102,12 +112,15 @@ export default function Profile() {
         <View style={styles.menuWrapper}>
           {mockDataWrapper?.map((item,index)=>{
             return (
-              <View key={index} style={styles.listMenuItem}>
+              <TouchableOpacity key={index} onPress={()=> item?.onPress()}>
+                <View style={styles.listMenuItem}>
                 {item.icon()}
                 <Text style={styles.value}>{item.value}</Text>
-              </View>
+                </View>
+              </TouchableOpacity>
             )
           })}
+         
         </View>
       </View>
     
@@ -119,7 +132,8 @@ const styles = StyleSheet.create({
   viewContainer: {
     backgroundColor: 'white',
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: Platform.OS === 'ios' ? 0: StatusBar.currentHeight
   },
   userInfo__header:{
     display:'flex',
