@@ -1,4 +1,3 @@
-// import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView, StyleSheet, Text, View, Image,  Platform, StatusBar, TouchableOpacity } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -17,10 +16,6 @@ export default function Profile() {
     setFullName(displayName)
   }, [isEdit])
 
-    // useFocusEffect(useCallback(()=>{
-    //   setFullName(displayName)
-    // }, []))
-  
   const  handleLogOut = ()=>{
     signOut(auth).then().catch()
     setIsAuth(false)

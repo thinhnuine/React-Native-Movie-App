@@ -6,6 +6,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import { getAuth, updateProfile } from "firebase/auth";
 import { AppContext } from "../Context";
+import * as ImagePicker from 'expo-image-picker';
+// import * as firebase from "firebase";
+// import uuid from 'uuid'
 const EditProfile = ({navigation:{navigate}}) => {
   const auth = getAuth();
   const {setIsEdit} = useContext(AppContext)
@@ -24,6 +27,48 @@ const EditProfile = ({navigation:{navigate}}) => {
   const [email1, setEmail1] = useState('')
   const [country, setCountry] = useState('')
   const [city, setCity]= useState('')
+  const [image, setImage] = useState('https://cdn-icons-png.flaticon.com/512/149/149071.png')
+
+  const pickImage = async()=>{
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing:true,
+      aspect: [4,3],
+      quality: 1,
+    })
+
+    if (!result.cancelled){
+      // const uploadUrl = await uploadImageAsync(result.uri);
+      // console.log('uploadUrl :', uploadUrl);
+      // setImage(uploadUrl)
+    }
+  }
+  // const uploadImageAsync = async(uri)=> {
+  //   try {
+  //   const blob = await new Promise((resolve, reject) => {
+  //     const xhr = new XMLHttpRequest();
+  //     xhr.onload = function() {
+  //       resolve(xhr.response);
+  //     };
+  //     xhr.onerror = function(e) {
+  //       reject(new TypeError('Network request failed'));
+  //     };
+  //     xhr.responseType = 'blob';
+  //     xhr.open('GET', uri, true);
+  //     xhr.send(null);
+  //   });
+
+  //   const  ref = firebase.storage().ref().child(uuid.v4);
+  //   const snapshot = await ref.put(blob);
+
+  //   blob.close();
+
+  // return await snapshot.ref.getDownloadURL();
+  //   } catch (error) {
+  //   console.log('error :', error);
+  //   }
+   
+  // }
   useEffect(() => {
     setFullName(displayName)
     setPhoneNumber1(phoneNumber)
@@ -33,14 +78,16 @@ const EditProfile = ({navigation:{navigate}}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.changeAvatar}>
-          <Image
-          style={styles.user__avatar}
-          source={{
-            uri:'https://cdn-icons-png.flaticon.com/512/149/149071.png'
-          }}
-          >
-          </Image>
+          
+        {/* {image && } */}
+        <Image
+        style={styles.user__avatar}
+        source={{
+          uri:'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+        }}
+        />
             <Ionicons
+              onPress={()=> pickImage()}
               name="md-camera-outline"
               size={35}
               color="white"

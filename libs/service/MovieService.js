@@ -136,3 +136,20 @@ export function useMovieDetailService() {
     getVideoMovieDetail
   }
 }
+
+export function searchMovieByKeyWord() {
+  const getMovieBySearch = async (keyword) =>{
+  console.log('keyword :', keyword);
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/keyword/${keyword}/movies?api_key=${api_key}&language=en-US`
+        )
+      return response.data.results
+    } catch (error) {
+      alert(error)      
+    }
+  }
+  return {
+    getMovieBySearch
+  }
+}
