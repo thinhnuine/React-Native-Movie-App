@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import { TextInput, StyleSheet, Text, View, Pressable, Dimensions, KeyboardAvoidingView } from 'react-native'
+import { TextInput,Keyboard, StyleSheet, Text, View, Pressable, Dimensions, ScrollView } from 'react-native'
 import { Link } from '@react-navigation/native'
 import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
-    marginTop: Dimensions.get('screen').height / 3,
+    marginTop: Dimensions.get('screen').height / 4,
     width: '70%'
   },
   formInput: {
