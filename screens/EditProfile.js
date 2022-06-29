@@ -36,39 +36,7 @@ const EditProfile = ({navigation:{navigate}}) => {
       aspect: [4,3],
       quality: 1,
     })
-
-    if (!result.cancelled){
-      // const uploadUrl = await uploadImageAsync(result.uri);
-      // console.log('uploadUrl :', uploadUrl);
-      // setImage(uploadUrl)
-    }
   }
-  // const uploadImageAsync = async(uri)=> {
-  //   try {
-  //   const blob = await new Promise((resolve, reject) => {
-  //     const xhr = new XMLHttpRequest();
-  //     xhr.onload = function() {
-  //       resolve(xhr.response);
-  //     };
-  //     xhr.onerror = function(e) {
-  //       reject(new TypeError('Network request failed'));
-  //     };
-  //     xhr.responseType = 'blob';
-  //     xhr.open('GET', uri, true);
-  //     xhr.send(null);
-  //   });
-
-  //   const  ref = firebase.storage().ref().child(uuid.v4);
-  //   const snapshot = await ref.put(blob);
-
-  //   blob.close();
-
-  // return await snapshot.ref.getDownloadURL();
-  //   } catch (error) {
-  //   console.log('error :', error);
-  //   }
-   
-  // }
   useEffect(() => {
     setFullName(displayName)
     setPhoneNumber1(phoneNumber)
@@ -78,8 +46,6 @@ const EditProfile = ({navigation:{navigate}}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.changeAvatar}>
-          
-        {/* {image && } */}
         <Image
         style={styles.user__avatar}
         source={{
