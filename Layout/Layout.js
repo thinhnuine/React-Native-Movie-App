@@ -13,6 +13,8 @@ import MovieDetail from '../screens/MovieDetail'
 import ResetPassword from '../screens/ResetPassword'
 import { AppContext } from "../Context.js"
 import { auth } from "../libs/configFirebase.js"
+import EditProfile from "../screens/EditProfile.js"
+import { StatusBar } from "react-native"
 function Content() {
   const { Navigator, Screen } = createBottomTabNavigator()
   return (
@@ -62,8 +64,6 @@ function Content() {
 const Layout = () => {
   const { Navigator, Screen } = createNativeStackNavigator()
   const {isAuth, setIsAuth} = useContext(AppContext)
-  console.log('isAuth :', isAuth);
-  // const [isAuth, setIsAuth] = useState(false);
   const [authError, setAuthError] = useState('')
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -96,6 +96,9 @@ const Layout = () => {
         <Navigator initialRouteName="Content">
           <Screen name="Content" component={Content} options={{ headerShown: false }} />
           <Screen name="MovieDetail" component={MovieDetail} options={{ headerShown: true }} />
+          <Screen name="EditProfile" component={EditProfile} options={{ headerShown: true, headerStyle:{
+            height: 20
+          } }}/>
         </Navigator>
       ) : (
         <Navigator initialRouteName="Login">

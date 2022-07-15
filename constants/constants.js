@@ -24,9 +24,9 @@ const {isAuth, setIsAuth} = React.useContext(AppContext)
 const auth = getAuth();
 const handleLogOut = ()=>{
   signOut(auth).then(response=>{
-    console.log('response :', response);
+    alert("Đăng xuất thành công");
   }).catch(error=>{
-    console.log('error :', error);
+    alert("Đăng xuất thất bại")
   })
   setIsAuth(false);
 }

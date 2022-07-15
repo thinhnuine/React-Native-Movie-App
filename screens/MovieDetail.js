@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar'
 import { useEffect, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, ScrollView, Text, Image } from 'react-native'
 import { useMovieDetailService } from '../libs/service/MovieService'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+
 export default function MovieDetail(props) {
   const { getMovieDetail } = useMovieDetailService()
   const movieId = props.route.params.id
@@ -25,7 +27,13 @@ export default function MovieDetail(props) {
             }}
           />
           <View style={styles.movieItem__wrap}>
-            <Text style={styles.movieItem__title}>{movieDetail?.original_title}</Text>
+            <View style={styles.movieItem__header}>
+              <Text style={styles.movieItem__title}>{movieDetail?.original_title}</Text>
+              <View style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                <AntDesign name="star" size={20} color='#fed142'/>
+                <Text style={{color:'#fed142', fontSize:20}}>{movieDetail?.vote_average ? movieDetail?.vote_average : '0.0'}</Text>
+              </View>
+            </View>
             <View style={styles.movieItem__info}>
               <View>
                 <Text style={styles.info__title}>Duration</Text>
@@ -68,22 +76,31 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20
   },
+  movieItem__header: {
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'flex-end',
+    justifyContent:'space-between',
+
+  },
   movieItem__info: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   movieItem__title: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#e9ecef',
-    marginTop: 30
+    marginTop: 30,
+    maxWidth: '90%'
   },
   info__title: {
     fontSize: 15,
     fontWeight: 'bold',
     color: '#e9ecef',
-    marginTop: 30
+    marginTop: 30,
   },
   info__detail: {
     fontSize: 13,
